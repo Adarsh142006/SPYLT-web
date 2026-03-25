@@ -1,6 +1,58 @@
-import React from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { SplitText } from "gsap/all";
 
 const MessageSection = () => {
+  useGSAP(()=>{
+    const firstMsgSplit = SplitText.create(".first-message",{
+      type:"words",
+    })
+     const SecMsgSplit = SplitText.create(".second-message",{
+      type:"words",
+    })
+     const paragraphSplit = SplitText.create(".message-content p",{
+      type:"words , lines",
+      linesClass:"paragraph-line"
+    })
+
+    gsap.to(firstMsgSplit.words,{
+      color:"#faeade",
+      ease:"power1.in",
+      stagger:1,
+      scrollTrigger:{
+        trigger:".message-content",
+        start:"top center",
+        end:"30% center",
+        scrub:true,
+        markers:true
+      },
+    })
+    gsap.to(SecMsgSplit.words,{
+      color:"#faeade",
+      ease:"power1.in",
+      stagger:1,
+      scrollTrigger:{
+        trigger:".second-message",
+        start:"top center",
+        end:"bottom center",
+        scrub:true,
+        markers:true
+      },
+    })
+    const revealTl = gsap.timeline({
+      delay:1,
+      scrollTrigger:{
+        trigger:".msg-text-scroll",
+        start:"top top",
+        markers:true,
+      },
+    });
+    revealTl.to(".msg-text-scroll",{
+      duration:1,
+      clipPath
+    })
+  })
+
   return (
     <section className="message-content">
       <div className="container mx-auto flex-center py-28 relative">
