@@ -4,6 +4,7 @@ import HeroSection from './sections/HeroSection'
 import { ScrollTrigger } from 'gsap/all'
 import gsap from 'gsap'
 import MessageSection from './sections/MessageSection'
+import FlavourSection from './sections/FlavourSection'
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,6 +15,7 @@ const App = () => {
       <Navbar/>
       <HeroSection/>
       <MessageSection/>
+      <FlavourSection/>
       <div className='h-dvh border border-red-500'/>
     </main>
   )
