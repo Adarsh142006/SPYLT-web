@@ -1,6 +1,7 @@
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap';
 import { SplitText } from 'gsap/all';
+import { ScrollTrigger } from 'gsap/all';
 
 const HeroSection = () => {
 
@@ -26,7 +27,7 @@ const HeroSection = () => {
         stagger:0.06,
         ease:"power2.out"
 
-    },"-=o.5");
+    },"-=0.5");
 
     const heroTl = gsap.timeline({
         scrollTrigger:{
@@ -34,20 +35,20 @@ const HeroSection = () => {
             start:"1% top",
             end:"bottom top",
             scrub:true,
-            markers:true,
+            // markers:true,
         },
     });
     heroTl.to(".hero-container",{
         rotate:7,
         scale:0.9,
-        ypercent:30,
+        yPercent:30,
         ease:"power1.inOut"
     });
    });
   return (
      <section className='bg-main-bg'>
         <div className='hero-container'>
-            <img src="/images/static-img.png" alt="hero-img" className='absolute bottom-0 left-1/2 -translate-x-1/2 object-auto scale-100 mad:scale-150' />
+            <img src="/images/static-img.png" alt="hero-img" className='absolute bottom-0 left-1/2 -translate-x-1/2 object-auto scale-100 md:scale-150' />
 
             <div className="hero-content opacity-0">
                 <div className='overflow-hidden'>

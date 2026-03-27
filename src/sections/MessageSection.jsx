@@ -11,7 +11,7 @@ const MessageSection = () => {
       type:"words",
     })
      const paragraphSplit = SplitText.create(".message-content p",{
-      type:"words , lines",
+      type:"words,lines",
       linesClass:"paragraph-line"
     })
 
@@ -40,7 +40,7 @@ const MessageSection = () => {
       },
     })
     const revealTl = gsap.timeline({
-      delay:1,
+      // delay:1,
       scrollTrigger:{
         trigger:".msg-text-scroll",
         start:"top 70%",
@@ -56,7 +56,7 @@ const MessageSection = () => {
       scrollTrigger:{
         trigger:".message-content p",
         start:"top center",
-        markers:true,
+        // markers:true,
       },
     });
     paragraphTl.from(paragraphSplit.words,{
