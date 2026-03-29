@@ -22,9 +22,9 @@ const App = () => {
       <Navbar />
       <div id="smooth-wrapper">
         <div id="smooth-content">
-          {/* <HeroSection />
+          <HeroSection />
           <MessageSection />
-          <FlavourSection /> */}
+          <FlavourSection />
           <NutriationSection/>
           <BenefitSection/>
           <div className="h-dvh border border-red-500" />
