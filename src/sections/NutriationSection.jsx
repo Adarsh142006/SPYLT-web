@@ -1,11 +1,65 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { nutrientLists } from '../constants'
 import { useMediaQuery } from 'react-responsive'
+import { useGSAP } from '@gsap/react';
+import { SplitText } from 'gsap/all';
+import gsap from 'gsap';
 
 const NutriationSection = () => {
 
     const  isMobile = useMediaQuery({
         query:"(max-width:768px)",
+    });
+    const [list, setList] = useState(nutrientLists );
+
+    useEffect(()=>{
+        if(isMobile){
+            setList(nutrientLists.slice(0,3));
+        }else{
+            setList(nutrientLists);
+        }
+    }, [isMobile]);
+
+    useGSAP(()=>{
+        const titleSplit = SplitText.create(".nutrition-title",{
+            type:"chars",
+        });
+        const paragraphSplit = SplitText.create(".nutrition-section p",{
+            type:"words,lines",
+            linesClass:"paragraph-line",
+        });
+
+        const contentTl = gsap.timeline({
+            scrollTrigger:{
+                trigger:".nutrition-section",
+                start:"top center",
+            },
+        });
+        contentTl.from(titleSplit.chars,{
+            yPercent:100,
+            stagger:0.02,
+            ease:"power2.out",
+        })
+        .from(paragraphSplit.words,{
+            yPercent:300,
+            rotate:3,
+            ease:"power1.inOut",
+            duration:1,
+            stagger:0.01,
+        });
+        const titleTl = gsap.timeline({
+            scrollTrigger:{
+                trigger:".nutrition-section",
+                start:"top 80%",
+
+            },
+        });
+        titleTl.to(".nutrition-text-scroll",{
+            duration:2,
+            opacity:1,
+            clipPath:"polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            ease:"power1.inOut"
+        })
     })
   return (
     <section className='nutrition-section'>
@@ -15,10 +69,12 @@ const NutriationSection = () => {
         <div className='flex md:flex-row flex-col justify-between md:px-10 px-5 mt-14 md:mt-0'>
             <div className="relative inline-block md:translate-y-20">
                 <div className="general-title relative flex flex-col justify-center items-center gap-24">
-                    <div className='overflow-hidden place-self-start'>
+                    <div className='nutrition-title overflow-hidden place-self-start'>
                         <h1>It Still Does</h1>
                     </div>
-                    <div style={{}} className="nutrition-text-scroll place-self-start">
+                    <div style={{
+                        clipPath:"polygon(0 0, 0 0, 0 100%, 0% 100%)"
+                    }} className="nutrition-text-scroll place-self-start">
                         <div className='bg-yellow-brown  pb-5 md:pt-0 pt-3 md:px-5 px-3 inline-block'>
                             <h2 className='text-milk-yellow'>Body Good</h2>
                         </div>
@@ -35,7 +91,7 @@ const NutriationSection = () => {
             <div className='nutrition-box'>
                 <div className="list-wrapper">
                     {
-                        nutrientLists.map((nutrient,index) => (
+                        list.map((nutrient,index) => (
                         <div key={index} className='relative flex-1 col-center'>
                             <div>
                                 <p className='md:text-lg font-paragraph'>{nutrient.label}</p>
@@ -44,7 +100,7 @@ const NutriationSection = () => {
                             </div>
 
                             {
-                                index !== nutrientLists.length -1 &&(
+                                index !== list.length -1 &&(
                                     <div className='spacer-border'></div>
                                 )
                             }
