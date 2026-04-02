@@ -1,6 +1,11 @@
 import React from 'react'
+import { useMediaQuery } from 'react-responsive'
 
 const FooterSection = () => {
+
+    const isMobile = useMediaQuery({
+        query:"(max-width:786px)",
+    });
   return (
     <section className='footer-section'>
         <img src="/images/footer-dip.png" alt="" className='w-full object-cover -translate-y-1'/>
@@ -8,9 +13,11 @@ const FooterSection = () => {
              <div className='overflow-hidden z-10 '>
                 <h1 className='general-title text-center text-milk py-5 '>#CHURGESPONSIBLY</h1>
              </div>
-
-             <video src="/videos/splash.mp4" autoPlay playsInline muted className='absolute top-0 object-contain mix-blend-lighten'></video>
-
+                {isMobile ? (
+                    <img src="/images/footer-drink.png" alt="" className='absolute top-5 pbject-contain'/>
+                ) : (
+                    <video src="/videos/splash.mp4" autoPlay playsInline muted className='absolute top-0 object-contain mix-blend-lighten'></video>
+                )}
              <div className='flex-center gap-5 relative z-10 md:mt-20 mt-5'>
                 <div className='social-btn'>
                     <img src="/images/yt.svg" alt="" />
@@ -20,6 +27,35 @@ const FooterSection = () => {
                 </div>
                 <div className='social-btn'>
                     <img src="/images/insta.svg" alt="" />
+                </div>
+             </div>
+
+             <div className="mt-30  md:px-10 px-5 flex gap-10 md:flex-row flex-col justify-between text-milk font-paragraph md:text-lg font-medium">
+                <div className="flex items-center md:gap-16 gap-5 ">
+                    <div>
+                        <p>SPLYT Flavor </p>
+                    </div>
+                    <div>
+                        <p>Chug Club</p>
+                        <p>Student Marketing</p>
+                        <p>Dairy Dealers</p>
+                    </div>
+                    <div>
+                        <p>Componey</p>
+                        <p>Contacts</p>
+                        <p>Tasty Talk</p>
+                    </div>
+                </div>
+                <div className='md:max-w-lg'>
+                 <p>Get Exclucive Early Access and Stay Informed About Product Updates,Events,and more!</p>
+                </div>
+             </div>
+
+             <div className="copyright-box">
+                <p>Copyright 2025 spylt - All Rights Reserved</p>
+                <div className='flex items-center gap-7'>
+                    <p>Privacy Policy</p>
+                    <p>Terms of Services</p>
                 </div>
              </div>
         </div>
